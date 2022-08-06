@@ -1,25 +1,37 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useMemo, useReducer } from "react";
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+
+import './App.scss'
+import Routes from "./routes";
+import { LocalDataContext } from './core/context';
+import localDataReducer from './core/reducers/localData';
 
 function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#16ABF8',
+      }
+    },
+    components: {
+      MuiButton: {
+        styleOverrides: {
+          sizeMedium: '20px'
+        }
+      }
+    }
+  });
+
+  const [store, dispatch] = useReducer(localDataReducer, {});
+  const contextValue = useMemo(() => ({ store, dispatch }), [store, dispatch]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <LocalDataContext.Provider value={contextValue}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </LocalDataContext.Provider>
+
   );
 }
 

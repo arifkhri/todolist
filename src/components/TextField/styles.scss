@@ -1,0 +1,19 @@
+
+.text-field {
+  height: 15px;
+  input {
+    font-size: 2.125rem;
+    padding: 0;
+  }
+  .MuiInputLabel-root {
+    display: none;
+  }
+  
+  .MuiInput-root {
+    margin-top: 0!important;
+  }
+  
+  .MuiInputLabel-root {
+    display: none;
+  }
+}

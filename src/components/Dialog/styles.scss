@@ -1,0 +1,12 @@
+@import '../../assets/styles/variables';
+
+.dialog {
+  .MuiPaper-root{
+    max-width: 500px;
+    border-radius: 20px;
+    padding: 15px;
+  }
+  .MuiDialogContent-root {
+    padding: 10px;
+  }
+}

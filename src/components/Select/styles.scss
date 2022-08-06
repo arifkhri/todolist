@@ -1,0 +1,10 @@
+
+.select {
+  .MuiSelect-select {
+    display: flex;
+  }
+  .MuiListItemIcon-root {
+    display: flex!important;
+    align-items: center!important;
+  }
+}
