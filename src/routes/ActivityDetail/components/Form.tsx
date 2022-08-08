@@ -1,72 +1,81 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import InputLabel from '@mui/material/InputLabel';
-import FormControl from '@mui/material/FormControl';
+import { useForm, Controller } from "react-hook-form";
 import Brightness1Icon from '@mui/icons-material/Brightness1';
 
 import Select from "../../../components/Select";
-import useLocalData from '../../../hooks/useLocalData';
 import { priorityOptions } from '../data';
+import InputLabel from "@mui/material/InputLabel";
+import FormControl from "@mui/material/FormControl";
+import Button from "../../../components/Button";
+import { data } from '../data';
 
 declare interface FormProps {
-  initialValues?: any;
+  defaultValues?: any;
+  submitAction: (formValue: any) => void;
+  cancelAction: () => void;
 }
 
 export default function Form(props: FormProps) {
-  const { dispatch } = useLocalData();
-  const { initialValues } = props;
-  const [formValue, setFormValue] = useState<any>();
-
-  useEffect(() => {
-    const priorityValue = priorityOptions.find((opt) => opt.value === initialValues.priority);
-    if(initialValues) {
-      setFormValue({...initialValues, priority: priorityValue});
-    }
-  }, [initialValues])
-
-  useEffect(() => {
-    dispatch(({
-      type: 'update',
-      name: 'formValue',
-      value: formValue
-    }));
-  }, [formValue])
+  const { defaultValues, cancelAction, submitAction } = props;
+  const { handleSubmit, control } = useForm({ defaultValues });
 
   return (
     <div className="d-flex flex-column">
-      <TextField
-        className="mb-2"
-        id="outlined-number"
-        label="Title"
-        type="text"
-        value={formValue?.title}
-        onChange={(e) => setFormValue({ ...formValue, title: e.target.value })}
-      />
-      <FormControl variant="outlined">
-        <InputLabel id="demo-simple-select-standard-label">Priority</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={formValue?.priority}
-          label="Priority"
-          onChange={(e) => {
-            setFormValue({ ...formValue, priority: e.target.value })
-          }}
-        >
-          {
-            priorityOptions.map((opt) => (
-              <MenuItem value={opt.value}>
-                <ListItemIcon><Brightness1Icon style={{ color: opt.clr }} /></ListItemIcon>
-                <ListItemText>{opt.label}</ListItemText>
-              </MenuItem>
-            )
-            )
-          }
-        </Select>
-      </FormControl>
+      <form onSubmit={handleSubmit(submitAction)}>
+        <div className="d-flex flex-column">
+          <Controller
+            name="title"
+            control={control}
+
+            render={({ field }) =>
+              <TextField
+                data-cy="modal-add-name-input"
+                className="mb-2"
+                id="outlined-number"
+                label={<span data-cy="modal-add-name-title">Title</span>}
+                type="text"
+                {...field} />
+
+            }
+          />
+          <Controller
+            name="priority"
+            control={control}
+            render={({ field }) => {
+              return (
+                <FormControl variant="outlined" className="mt-4 mb-3">
+                  <InputLabel id="demo-simple-select-standard-label" data-cy="modal-add-name-priority">Priority</InputLabel>
+                  <Select
+                    data-cy="modal-add-priority-select"
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    {...field}
+                    label="Priority"
+                  >
+                    {
+                      priorityOptions.map((opt) => (
+                        <MenuItem value={opt.value}>
+                          <ListItemIcon><Brightness1Icon style={{ color: opt.clr }} /></ListItemIcon>
+                          <ListItemText>{opt.label}</ListItemText>
+                        </MenuItem>
+                      )
+                      )
+                    }
+                  </Select>
+                </FormControl>
+              )
+            }} />
+        </div>
+
+        <div className="d-flex justify-content-end mt-3">
+          <Button variant="text" className="mr-2" data-cy="modal-add-close-button" onClick={cancelAction}>Batal</Button>
+          <Button type="submit" variant="contained" data-cy="modal-add-save-button">Simpan</Button>
+        </div>
+      </form>
     </div >
 
   )

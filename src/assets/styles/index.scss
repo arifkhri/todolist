@@ -3,3 +3,11 @@
 @import "./mui";
 @import "./utils";
 @import "./spinner";
+
+
+.link {
+  color: $primary;
+  &:hover {
+    cursor: pointer;
+  }
+}

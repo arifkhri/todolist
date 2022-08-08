@@ -9,12 +9,18 @@ export const data = {
     toolbarSortOptBtn: 'sort-selection',
 
     // list
+    confirmDel: 'todo-modal-delete',
+    dialogInformationIcon: "modal-information-icon",
+    dialogInformationTitle: "modal-information-title",
+    confirmDelIcon: 'modal-delete-icon',
+    confirmDelTitle: 'modal-delete-title',
     tableDeleteBtn: 'todo-item-delete-button',
     tableEditBtn: 'todo-item-edit-button',
-    tableEditField: '',
     tableEditLabel: 'todo-item-title',
     tableIndicator: 'todo-item-priority-indicator',
-    tableCheckAction: 'todo-item-checkbox' 
+    tableCheckAction: 'todo-item-checkbox',
+    dialogCancel: "modal-delete-cancel-button",
+    dialogSubmit: "modal-delete-confirm-button",
   },
   ilustrationEmpty: '/illustration/todo-empty-state.svg'
 }
@@ -29,10 +35,6 @@ export const priorityOptions = [{
   value: 'high'
 }, {
   clr: '#34A790',
-  label: 'Medium',
-  value: 'medium'
-}, {
-  clr: '#428BC1',
   label: 'Medium',
   value: 'medium'
 }, {

@@ -3,26 +3,28 @@ import Grid from '@mui/material/Grid';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
+import ListItemIcon from '@mui/material/ListItemIcon';
 import TableContainer from '@mui/material/TableContainer';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-
 import IconButton from '@mui/material/IconButton';
-import DeleteIcon from '@mui/icons-material/Delete';
-import CheckBox from "@mui/icons-material/CheckBox";
+import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
+import Brightness1Icon from '@mui/icons-material/Brightness1';
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import EmptyState from '../../../../components/EmptyState';
-import { todoReq } from '../../../../core/api';
+import { priorityOptions } from '../../data';
 
 declare interface TableListProps {
   data: {
     cy: {
+      confirmDelTitle: string;
+      confirmDelIcon: string;
       tableDeleteBtn: string;
       tableEditBtn: string;
       tableEditLabel: string;
-      tableEditField: string;
       tableCheckAction: string;
       tableIndicator: string;
       ilustrationEmpty: string;
@@ -30,7 +32,7 @@ declare interface TableListProps {
     ilustrationEmpty: string;
   };
   listData: IListData;
-  deleteAction: (id: number) => void;
+  deleteAction: (id: ITodo) => void;
   editAction: (id: ITodo) => void;
 }
 
@@ -39,14 +41,13 @@ function TableList(props: TableListProps) {
   const { data: { cy, ilustrationEmpty }, listData, deleteAction, editAction } = props;
   const { data } = listData;
 
-  function handleDelete(id: number) {
-    deleteAction(id);
+  function handleDelete(record: ITodo) {
+    deleteAction(record);
   }
 
   function handleEditAction(record: ITodo) {
     editAction(record);
   }
-  
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -58,27 +59,27 @@ function TableList(props: TableListProps) {
             <TableBody>
               {data.map((record) => (
                 <TableRow
+                  data-cy="todo-item"
                   key={record.id}
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell scope="row">
-                    <CheckBox {...label} data-cy={cy.tableCheckAction} />
+                    <Checkbox {...label} data-cy={cy.tableCheckAction}/>
                   </TableCell>
 
                   <TableCell align="left">
                     <Grid item xs={6} className="d-flex align-items-center">
+                      <ListItemIcon data-cy="todo-item-priority-indicator"><Brightness1Icon style={{ color: priorityOptions.find((option) => option.value === record.priority)?.clr }} /></ListItemIcon>
                       <Typography variant="h5" data-cy={cy.tableEditLabel} className="mr-2"> {record.title} </Typography>
-                        <div>
-                          <IconButton aria-label="edit" data-cy={cy.tableEditBtn} onClick={() => handleEditAction(record)}>
-                            <EditIcon />
-                          </IconButton>
-                        </div>
-                      </Grid>
+                    </Grid>
                   </TableCell>
 
                   <TableCell align="right">
-                    <IconButton aria-label="delete" data-cy={cy.tableDeleteBtn} onClick={() => handleDelete(record.id)}>
+                    <IconButton aria-label="delete" data-cy={cy.tableDeleteBtn} onClick={() => handleDelete(record)}>
                       <DeleteIcon />
+                    </IconButton>
+                    <IconButton aria-label="edit" data-cy={cy.tableEditBtn} onClick={() => handleEditAction(record)}>
+                      <EditIcon />
                     </IconButton>
                   </TableCell>
                 </TableRow>

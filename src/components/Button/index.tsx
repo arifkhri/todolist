@@ -3,7 +3,7 @@ import {default as ButtonBase, ButtonProps as ButtonBaseProps} from "@mui/materi
 
 import './styles.scss';
 
-declare interface ButtonProps extends ButtonBaseProps {
+export declare interface ButtonProps extends ButtonBaseProps {
   children: any;
 }
 

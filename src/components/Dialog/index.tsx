@@ -4,58 +4,57 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 
-import Button from '../Button';
+import Button, { ButtonProps } from '../Button';
 import './styles.scss';
 
 export declare interface DialogProps extends DialogBaseProps {
   title?: string;
   open: boolean;
-  content?: string | React.ReactNode;
+  content?: any;
+  "data-cy"?: string;
   button?: {
-    cancelTitle?: string;
-    cancelAction: () => void;
-    submitTitle?: string;
-    submitAction: () => void;
+    cancel: {
+      "data-cy": string;
+      title?: string;
+    } & Omit<ButtonProps, "children">;
+    submit: {
+      "data-cy": string;
+      title?: string;
+    } & Omit<ButtonProps, "children">;
   }
 }
 
 export default function Dialog(props: DialogProps) {
-  const theme = useTheme();
-  // const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
-  const { button, open, content, title } = props;
 
-  const handleSubmit = () => {
-    if (button) button.submitAction();
-  }
-
-  const handleClose = () => {
-    if (button) button.cancelAction();
-  }
+  const { button, open, content, title, onClose } = props;
 
   return (
     <DialogBase
       className="dialog"
-      // fullScreen={fullScreen}
+      onClose={onClose}
       open={open}
+      data-cy={props['data-cy']}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
 
-      <DialogContent style={{maxWidth: "500px"}}>
+      <DialogContent style={{ maxWidth: "500px" }}>
         <DialogContentText id="alert-dialog-description">
           {content}
         </DialogContentText>
       </DialogContent>
 
-      <DialogActions>
-        <Button variant="contained" onClick={handleClose}>{button?.cancelTitle || 'Batal'}</Button>
-        <Button variant="contained" onClick={handleSubmit} autoFocus>{button?.submitTitle}</Button>
-      </DialogActions>
+      {
+        button && (
+          <DialogActions className="d-flex- justify-content-center">
+            <Button variant="text" {...(button?.cancel || {})}>{button?.cancel?.title || "Batal"}</Button>
+            <Button type="submit" variant="contained" {...(button?.submit || {})}>{button?.submit?.title || "Simpan"}</Button>
+          </DialogActions>
+        )
+      }
     </DialogBase>
   );
 }

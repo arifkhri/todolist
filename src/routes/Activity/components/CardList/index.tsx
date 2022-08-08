@@ -10,11 +10,12 @@ import Typography from '@mui/material/Typography';
 
 import Card from '../../../../components/Card';
 import EmptyState from '../../../../components/EmptyState';
-import { activityReq } from '../../../../core/api';
+import { data } from '../../data';
 
 declare interface CardListProps {
   data: {
     cy: {
+      cardItem: string;
       cardTitle: string;
       cardCreatedDate: string;
       cardDeleteBtn: string;
@@ -23,28 +24,28 @@ declare interface CardListProps {
     ilustrationEmpty: string;
   };
   listData: IListData;
-  deleteAction: (id: number) => void;
+  deleteAction: (id: IActivityDetail) => void;
 }
 
 function CardList(props: CardListProps) {
   const { data: { cy, ilustrationEmpty }, listData, deleteAction } = props;
-  const { data } = listData;
+  const { data: source } = listData;
   const navigate = useNavigate();
 
-  function handleDelete(id: number) {
-    deleteAction(id);
+  function handleDelete(record: IActivityDetail) {
+    deleteAction(record)
   }
 
-  const ContentList = data.map((record: any) =>
+  const ContentList = source.map((record: any) =>
     <Grid item lg={3} key={record.id} className="mx-2 mb-4">
-      <Card sx={{ width: "230px", height: "234px" }} onClick={() => {
-        navigate(`/${record.id}`)
-      }}>
+      <Card sx={{ width: "230px", height: "234px" }} data-cy={data.cy.cardItem}>
 
         <CardContent className="d-flex flex-column justify-content-between h-100 p-0">
 
           <Tooltip title={record.title}>
-            <Typography gutterBottom variant="h5" noWrap className="py-3 px-3 text-center" data-cy={cy.cardTitle}>
+            <Typography gutterBottom variant="h5" noWrap className="link py-3 px-3 text-center" data-cy={cy.cardTitle} onClick={() => {
+              navigate(`/${record.id}`)
+            }}>
               {record.title}
             </Typography>
           </Tooltip>
@@ -56,7 +57,7 @@ function CardList(props: CardListProps) {
               </Typography>
             </div>
             <div>
-              <IconButton aria-label="delete" data-cy={cy.cardDeleteBtn} onClick={() => handleDelete(record.id)}>
+              <IconButton aria-label="delete" data-cy={cy.cardDeleteBtn} onClick={() => handleDelete(record)}>
                 <DeleteIcon />
               </IconButton>
             </div>
@@ -69,12 +70,14 @@ function CardList(props: CardListProps) {
   );
 
   return (
-    data.length > 0 ?
-      <Grid className="d-flex flex-wrap justify-content-center loader" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
-        {ContentList}
-      </Grid>
-      :
-      <EmptyState url={ilustrationEmpty} dataCY={cy.ilustrationEmpty} />
+    <>
+      {source.length > 0 ?
+        <Grid className="d-flex flex-wrap justify-content-center loader" spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+          {ContentList}
+        </Grid>
+        :
+        <EmptyState url={ilustrationEmpty} dataCY={cy.ilustrationEmpty} />}
+    </>
   );
 }
 
