@@ -36,7 +36,7 @@ export const priorityOptions = [{
 }, {
   clr: '#34A790',
   label: 'Medium',
-  value: 'medium'
+  value: 'normal'
 }, {
   clr: '#428BC1',
   label: 'Low',

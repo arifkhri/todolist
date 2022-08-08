@@ -130,7 +130,7 @@ function ActivityDetail() {
               if (res) {
                 setDialogOpt({
                   open: true,
-                  onClose: () => setDialogOpt({open:false}),
+                  onClose: () => setDialogOpt({ open: false }),
                   "data-cy": "modal-information",
                   content:
                     <div className="d-flex justify-content-center px-3 mb-4">
@@ -148,8 +148,54 @@ function ActivityDetail() {
     })
   }
 
+  function handleStatus(value: ITodo) {
+    todoReq.update(value.id.toString(), { ...value, is_active: !value.is_active ? 1 : 0 }).then((res) => {
+      loadData();
+    })
+  }
+
   function handleSort(value: string) {
-    console.log("🚀 ~ file: index.tsx ~ line 122 ~ handleSort ~ value", value)
+    let newListData = listData.data;
+
+    switch (true) {
+      case value === 'newest':
+
+        newListData = listData.data.sort(function (a, b) {
+          return (a.id + b.id)
+        });
+        setListData({ ...listData, data: newListData });
+        break;
+
+      case value === 'oldest':
+
+        newListData = listData.data.sort(function (a, b) {
+          return (a.id - b.id)
+        });
+        setListData({ ...listData, data: newListData });
+
+        break;
+
+      case value === 'a-z':
+        newListData = listData.data.sort(function (a, b) {
+          return a.title.localeCompare(b.title);
+        });
+        setListData({ ...listData, data: newListData });
+
+        break;
+
+      case value === 'z-a':
+        newListData = listData.data.sort(function (a, b) {
+          return b.title.localeCompare(a.title);
+        });
+        setListData({ ...listData, data: newListData });
+
+        break;
+
+
+      default:
+        setListData({ ...listData, data: newListData });
+        break;
+    }
 
   }
 
@@ -175,7 +221,7 @@ function ActivityDetail() {
   return (
     <>
       <Toolbar sortAction={handleSort} title={detailData?.title} backBtn="/" editAction={handleUpdateTitle} createAction={handleCreate} data={data} />
-      <TableList listData={listData} data={data} deleteAction={handleDelete} editAction={handleUpdate} />
+      <TableList listData={listData} data={data} deleteAction={handleDelete} editAction={handleUpdate} statusAction={handleStatus} />
       <Dialog {...dialogOpt} />
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}

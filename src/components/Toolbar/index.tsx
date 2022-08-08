@@ -47,23 +47,23 @@ function Toolbar(props: ToolbarProps) {
   const sortOptions = [{
     icon: <ImportExport />,
     label: 'Terbaru',
-    value: 'sort1',
+    value: 'newest',
   }, {
     icon: <ImportExport />,
     label: 'Terlama',
-    value: 'sort2',
+    value: 'oldest',
   }, {
     icon: <ImportExport />,
     label: 'A-Z',
-    value: 'sort3',
+    value: 'a-z',
   }, {
     icon: <ImportExport />,
     label: 'Z-A',
-    value: 'sort4',
+    value: 'z-a',
   }, {
     icon: <ImportExport />,
     label: 'Belum Selesai',
-    value: 'sort5',
+    value: 'not',
   }]
 
   function handleBackAction() {
@@ -122,18 +122,18 @@ function Toolbar(props: ToolbarProps) {
               <EditIcon />
             </IconButton>
           </>
-            : <Typography variant="h4" data-cy={cy.toolbarTitle} className="mr-2"> {title} </Typography>
+            : <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className="mr-2"> {title} </Typography>
         }
 
-        {
+        {/* {
           editAction && !isEdit && (
             <div>
-              <IconButton aria-label="edit" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()}>
+              <IconButton aria-label="edit" data-cy={cy.toolbarTitle} >
                 <EditIcon />
               </IconButton>
             </div>
           )
-        }
+        } */}
       </Grid>
 
       <Grid item xs={6} className="d-flex justify-content-end" >

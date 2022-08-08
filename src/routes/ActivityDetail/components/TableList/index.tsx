@@ -32,13 +32,14 @@ declare interface TableListProps {
     ilustrationEmpty: string;
   };
   listData: IListData;
-  deleteAction: (id: ITodo) => void;
-  editAction: (id: ITodo) => void;
+  statusAction: (todo: ITodo) => void;
+  deleteAction: (todo: ITodo) => void;
+  editAction: (todo: ITodo) => void;
 }
 
 function TableList(props: TableListProps) {
 
-  const { data: { cy, ilustrationEmpty }, listData, deleteAction, editAction } = props;
+  const { data: { cy, ilustrationEmpty }, listData, deleteAction, editAction, statusAction } = props;
   const { data } = listData;
 
   function handleDelete(record: ITodo) {
@@ -64,7 +65,7 @@ function TableList(props: TableListProps) {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell scope="row">
-                    <Checkbox {...label} data-cy={cy.tableCheckAction}/>
+                    <Checkbox {...label} data-cy={cy.tableCheckAction} onChange={() => statusAction(record)}/>
                   </TableCell>
 
                   <TableCell align="left">
