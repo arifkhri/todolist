@@ -1,11 +1,12 @@
 const request = (url: string, options: any) => {
   const baseUrl = "https://todo.api.devcode.gethired.id";
   return fetch(`${baseUrl}${url}`, {
+    ...options,
     headers: {
+      ...options.headers,
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
-    ...options,
   }).then(res => res.json());
 
 }
@@ -29,6 +30,12 @@ const fetcher = {
   patch: (url: string, body: any) => {
     const options = {
       method: 'patch',
+      // mode: "no-cors",
+      headers: {
+        Accept: '*/*',
+        "Accept-Encoding": "gzip, deflate, br",
+        "Connection": "keep-alive"
+      },
       body: JSON.stringify(body),
     }
     return request(url, options);

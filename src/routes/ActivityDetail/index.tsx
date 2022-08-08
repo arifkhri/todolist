@@ -54,7 +54,7 @@ function ActivityDetail() {
   function handleCreate() {
     showModal({
       "data-cy": "modal-add",
-      // onClose: () => hideModal(),
+      onClose: () => hideModal(),
       title: <h4 className="m-0" data-cy="modal-add-title">Tambah List Item</h4>,
       content: <Form defaultValues={{
         priority: "very-high",
@@ -67,7 +67,7 @@ function ActivityDetail() {
   function handleUpdate(record: ITodo) {
     showModal({
       "data-cy": "modal-add",
-      // onClose: () => hideModal(),
+      onClose: () => hideModal(),
       title: "Ubah Item",
       content: <Form defaultValues={record} cancelAction={() => hideModal()} submitAction={(formValues) => handleSubmit('update', formValues)} />,
     });

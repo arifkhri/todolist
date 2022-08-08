@@ -118,17 +118,17 @@ function Toolbar(props: ToolbarProps) {
         {
           isEdit ? <>
             <TextField className="mr-2" id="outlined-basic" label="Activity" variant="standard" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
-            <IconButton aria-label="submit-edit" data-cy={cy.toolbarEditBtn} onClick={() => handleSubmitEditAction()}>
+            <IconButton aria-label="submit-edit" data-cy={cy.toolbarTitle} onClick={() => handleSubmitEditAction()}>
               <EditIcon />
             </IconButton>
           </>
-            : <Typography variant="h4" data-cy={cy.toolbarEditBtn} className="mr-2"> {title} </Typography>
+            : <Typography variant="h4" data-cy={cy.toolbarTitle} className="mr-2"> {title} </Typography>
         }
 
         {
           editAction && !isEdit && (
             <div>
-              <IconButton aria-label="edit" data-cy={cy.toolbarEditBtn} onClick={() => handleEditAction()}>
+              <IconButton aria-label="edit" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()}>
                 <EditIcon />
               </IconButton>
             </div>
