@@ -91,7 +91,7 @@ function Toolbar(props: ToolbarProps) {
     if (sortAction) {
       sortAction(value);
       setSortValue(value);
-      hideSort();
+      // hideSort();
     };
   }
 
