@@ -17,7 +17,7 @@ function Routes() {
               <Activity />
             </React.Suspense>
           } />
-          <Route path="/:activityId" element={
+          <Route path="/detail/:activityId" element={
             <React.Suspense fallback={<Loading />}>
               <ActivityDetail />
             </React.Suspense>

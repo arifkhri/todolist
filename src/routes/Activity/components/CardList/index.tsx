@@ -44,7 +44,7 @@ function CardList(props: CardListProps) {
 
           <Tooltip title={record.title}>
             <Typography gutterBottom variant="h5" noWrap className="link py-3 px-3 text-center" data-cy={cy.cardTitle} onClick={() => {
-              navigate(`/${record.id}`)
+              navigate(`/detail/${record.id}`)
             }}>
               {record.title}
             </Typography>
