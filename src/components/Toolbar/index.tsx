@@ -122,7 +122,7 @@ function Toolbar(props: ToolbarProps) {
               <EditIcon />
             </IconButton>
           </>
-            : <Typography variant="h4" data-cy={cy.toolbarTitle} className="mr-2"> {title} </Typography>
+            : <Typography variant="h4" data-cy={cy.toolbarEditBtn} className="mr-2"> {title} </Typography>
         }
 
         {

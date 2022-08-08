@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import MenuItem from '@mui/material/MenuItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -15,17 +15,31 @@ import { data } from '../data';
 
 declare interface FormProps {
   defaultValues?: any;
-  submitAction: (formValue: any) => void;
+  submitAction: (formValue: any) => Promise<any>;
   cancelAction: () => void;
 }
 
 export default function Form(props: FormProps) {
   const { defaultValues, cancelAction, submitAction } = props;
-  const { handleSubmit, control } = useForm({ defaultValues });
+  const { handleSubmit, control, reset, getValues, watch, setValue } = useForm({ defaultValues });
+  const [formValid, setFormValid] = useState(false);
+  
+  function afterSubmitAction(formValues: any) {
+    // console.log()
+    // reset()
+    submitAction(formValues).then(() => {
+      setValue('title', '');
+      setValue('priority', 'very-high');
+    });
+  }
+
+  useEffect(() => {
+    setFormValid(getValues('title'));
+  }, [watch('title')])
 
   return (
     <div className="d-flex flex-column">
-      <form onSubmit={handleSubmit(submitAction)}>
+      <form onSubmit={handleSubmit(afterSubmitAction)}>
         <div className="d-flex flex-column">
           <Controller
             name="title"
@@ -73,7 +87,7 @@ export default function Form(props: FormProps) {
 
         <div className="d-flex justify-content-end mt-3">
           <Button variant="text" className="mr-2" data-cy="modal-add-close-button" onClick={cancelAction}>Batal</Button>
-          <Button type="submit" variant="contained" data-cy="modal-add-save-button">Simpan</Button>
+          <Button disabled={!formValid} type="submit" variant="contained" data-cy="modal-add-save-button">Simpan</Button>
         </div>
       </form>
     </div >

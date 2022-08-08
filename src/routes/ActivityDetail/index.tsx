@@ -46,6 +46,8 @@ function ActivityDetail() {
       if (res) {
         loadData();
       }
+    }).catch((e) => {
+      console.log(e.message)
     });
   }
 
@@ -79,26 +81,25 @@ function ActivityDetail() {
       req = todoReq.create(formValues);
     }
 
-    req.then((res) => {
-      if (type === "update") {
-        if (res) {
-          loadData();
-        }
+    return req.then((res) => {
+      console.log("🚀 ~ file: index.tsx ~ line 85 ~ returnreq.then ~ res", res)
+      if (res.code !== 500) {
+        hideModal();
       }
-      hideModal();
       loadData();
-    }).catch((e) => {
-      setDialogOpt({
-        open: true,
-        onClose: () => setDialogOpt({ open: false }),
-        "data-cy": data.cy.confirmDel,
-        content:
-          <div className="d-flex justify-content-center px-3 mb-4">
-            <WarningAmberRounded color="error" data-cy="modal-information-icon" style={{ fontSize: "60px", margin: 'auto' }} />
-            <p data-cy="modal-information-title">Gagal mengedit activity </p>
-          </div>
-      });
     })
+    // .catch((e) => {
+    //   setDialogOpt({
+    //     open: true,
+    //     onClose: () => setDialogOpt({ open: false }),
+    //     "data-cy": data.cy.confirmDel,
+    //     content:
+    //       <div className="d-flex justify-content-center px-3 mb-4">
+    //         <WarningAmberRounded color="error" data-cy="modal-information-icon" style={{ fontSize: "60px", margin: 'auto' }} />
+    //         <p data-cy="modal-information-title">Gagal mengedit activity </p>
+    //       </div>
+    //   });
+    // })
   }
 
   function handleDelete(record: ITodo) {
