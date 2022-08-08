@@ -58,7 +58,7 @@ export default function Form(props: FormProps) {
                   >
                     {
                       priorityOptions.map((opt) => (
-                        <MenuItem value={opt.value} data-cy="modal-add-priority">
+                        <MenuItem value={opt.value} data-cy="modal-add-priority-item">
                           <ListItemIcon><Brightness1Icon style={{ color: opt.clr }} /></ListItemIcon>
                           <ListItemText>{opt.label}</ListItemText>
                         </MenuItem>
