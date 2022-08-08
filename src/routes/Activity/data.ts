@@ -4,7 +4,7 @@ export const data = {
     dialogInformationIcon: "modal-information-icon",
     dialogInformationTitle: "modal-information-title",
     confirmDelIcon: 'modal-delete-icon',
-    confirmDel: 'todo-modal-delete',
+    confirmDel: 'modal-delete',
     confirmDelTitle: 'modal-delete-title',
     toolbarTitle: 'activity-title',
     toolbarCreateBtn: 'activity-add-button',

@@ -38,16 +38,18 @@ function CardList(props: CardListProps) {
 
   const ContentList = source.map((record: any) =>
     <Grid item lg={3} key={record.id} className="mx-2 mb-4">
-      <Card sx={{ width: "230px", height: "234px" }} data-cy={data.cy.cardItem}>
+      <Card sx={{ width: "230px", height: "234px" }}>
 
         <CardContent className="d-flex flex-column justify-content-between h-100 p-0">
 
           <Tooltip title={record.title}>
-            <Typography gutterBottom variant="h5" noWrap className="link py-3 px-3 text-center" data-cy={cy.cardTitle} onClick={() => {
+            <div data-cy="activity-item" onClick={() => {
               navigate(`/detail/${record.id}`)
             }}>
+            <Typography gutterBottom variant="h5" noWrap className="link py-3 px-3 text-center" data-cy={cy.cardTitle}>
               {record.title}
             </Typography>
+            </div>
           </Tooltip>
 
           <div className="d-flex justify-content-between align-items-baseline py-3 pr-4 pl-5">

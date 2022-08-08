@@ -48,9 +48,9 @@ export default function Form(props: FormProps) {
             render={({ field }) => {
               return (
                 <FormControl variant="outlined" className="mt-4 mb-3">
-                  <InputLabel id="demo-simple-select-standard-label" data-cy="modal-add-name-priority">Priority</InputLabel>
+                  <InputLabel id="demo-simple-select-standard-label" data-cy="modal-add-priority-title">Priority</InputLabel>
                   <Select
-                    data-cy="modal-add-priority-select"
+                    data-cy="modal-add-priority-dropdown"
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     {...field}

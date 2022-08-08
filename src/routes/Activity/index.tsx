@@ -41,7 +41,8 @@ function Activity() {
   function handleDelete(record: IActivityDetail) {
     setDialogOpt({
       open: true,
-      "data-cy": data.cy.confirmDel,
+      onClose: () => setDialogOpt({ open: false }),
+      "data-cy": "modal-delete",
       content:
         <div className="d-flex justify-content-center flex-column px-3 mb-4">
           <WarningAmberRounded color="error" data-cy={data.cy.confirmDelIcon} style={{ fontSize: "60px", margin: 'auto' }} />
@@ -71,7 +72,7 @@ function Activity() {
         setDialogOpt({
           open: true,
           onClose: () => setDialogOpt({open:false}),
-          "data-cy": data.cy.confirmDel,
+          "data-cy": "modal-information",
           content:
             <div className="d-flex justify-content-center px-3 mb-4">
               <Check color="success" data-cy="modal-information-icon" style={{ fontSize: "60px", margin: 'auto' }} />
@@ -83,7 +84,7 @@ function Activity() {
         setDialogOpt({
           open: true,
           onClose: () => setDialogOpt({open:false}),
-          "data-cy": data.cy.confirmDel,
+          "data-cy": "modal-information",
           content:
             <div className="d-flex justify-content-center px-3 mb-4">
               <WarningAmberRounded color="error" data-cy="modal-information-icon" style={{ fontSize: "60px", margin: 'auto' }} />

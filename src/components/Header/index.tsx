@@ -20,7 +20,7 @@ function Header() {
             className="text-center title"
             sx={{ flexGrow: 1, display: { xs: 'block' } }}
           >
-            <h3 className="m-0" data-cy="header-title">TODO LIST APP</h3>
+            <h3 className="m-0" data-cy="header-title">TO DO LIST APP</h3>
           </Typography>
         </Toolbar>
       </AppBar>
