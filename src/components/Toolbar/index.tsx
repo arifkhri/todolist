@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -13,7 +13,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Check from '@mui/icons-material/Check';
 
 
-import TextField from "../TextField";
 import Button from '../Button';
 
 import "./styles.scss";
@@ -40,6 +39,8 @@ declare interface ToolbarProps {
 }
 
 function Toolbar(props: ToolbarProps) {
+  const inputRef: any = useRef();
+  
   const { title, editAction, createAction, sortAction, backBtn, data: { cy } } = props;
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -74,6 +75,10 @@ function Toolbar(props: ToolbarProps) {
 
   function handleEditAction() {
     setIsEdit(true);
+    setTimeout(() => {
+      inputRef.current.focus();
+    }, 100);
+    console.log(inputRef)
   }
 
 
@@ -117,16 +122,16 @@ function Toolbar(props: ToolbarProps) {
             </div>
           )
         }
-        <input data-cy={cy.toolbarTitle} className={`mr-2 input ${!isEdit && "input-deactive"}`} id="outlined-basic"  value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()}  />
-        {/* <TextField InputProps={{  }} className={`mr-2 ${!isEdit && "input-deactive"}`} id="outlined-basic" label="Activity" variant="standard" value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()} /> */}
-        {
-          isEdit && <>
-            <IconButton aria-label="submit-edit" data-cy={cy.toolbarTitle} onClick={() => handleSubmitEditAction()}>
-              <EditIcon />
-            </IconButton>
+          <input ref={inputRef} data-cy={cy.toolbarTitle} className={`mr-2 input ${!isEdit && "d-none input-deactive"}`} id="outlined-basic"  value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()}  />
+          <IconButton aria-label="submit-edit" data-cy="todo-title-edit-button" onClick={() => handleSubmitEditAction()} className={`${!isEdit && "d-none"}`}>
+            <EditIcon />
+          </IconButton>
+
+          <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className={`mr-2 ${isEdit && "d-none"}`}> {title} </Typography>
+        {/* {
+          isEdit ? <>
           </>
-          // : <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className="mr-2"> {title} </Typography>
-        }
+        } */}
 
         {/* {
           editAction && !isEdit && (

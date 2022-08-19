@@ -42,6 +42,7 @@ function ActivityDetail() {
   }
 
   function handleUpdateTitle(title: string) {
+    setDetailData({...detailData, title})
     activityReq.update(activityId, { title }).then((res) => {
       if (res) {
         loadData();
