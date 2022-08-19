@@ -40,7 +40,7 @@ declare interface ToolbarProps {
 
 function Toolbar(props: ToolbarProps) {
   const inputRef: any = useRef();
-  
+
   const { title, editAction, createAction, sortAction, backBtn, data: { cy } } = props;
   const navigate = useNavigate();
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -122,16 +122,16 @@ function Toolbar(props: ToolbarProps) {
             </div>
           )
         }
-          <input ref={inputRef} data-cy={cy.toolbarTitle} className={`mr-2 input ${!isEdit && "d-none input-deactive"}`} id="outlined-basic"  value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()}  />
-          <IconButton aria-label="submit-edit" data-cy="todo-title-edit-button" onClick={() => handleSubmitEditAction()} className={`${!isEdit && "d-none"}`}>
-            <EditIcon />
-          </IconButton>
 
-          <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className={`mr-2 ${isEdit && "d-none"}`}> {title} </Typography>
-        {/* {
+        {
           isEdit ? <>
-          </>
-        } */}
+            <input ref={inputRef} data-cy={cy.toolbarTitle} className={`mr-2 input ${!isEdit && "d-none input-deactive"}`} id="outlined-basic" value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()} />
+            <IconButton aria-label="submit-edit" data-cy="todo-title-edit-button" onClick={() => handleSubmitEditAction()} className={`${!isEdit && "d-none"}`}>
+              <EditIcon />
+            </IconButton>
+          </> :
+            <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className={`mr-2 ${isEdit && "d-none"}`}> {title} </Typography>
+        }
 
         {/* {
           editAction && !isEdit && (
