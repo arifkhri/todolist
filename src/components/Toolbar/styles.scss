@@ -1,0 +1,15 @@
+.input-deactive {
+  .MuiInput-underline {
+    &:hover {
+      &::before {
+        border-bottom: 0px;
+      }
+    }
+    &::before {
+      border-bottom: 0px;
+    }
+    &::after {
+      border-bottom: 0px;
+    }
+  }
+}

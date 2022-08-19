@@ -106,7 +106,6 @@ function Activity() {
       <Toolbar title="Activity" createAction={handleCreate} data={data} />
       <CardList listData={listData} data={data} deleteAction={handleDelete} />
       <Dialog {...dialogData} />
-
     </>
   );
 }

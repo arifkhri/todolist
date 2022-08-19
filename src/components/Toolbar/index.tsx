@@ -16,6 +16,8 @@ import Check from '@mui/icons-material/Check';
 import TextField from "../TextField";
 import Button from '../Button';
 
+import "./styles.scss";
+
 declare interface ToolbarProps {
   data: {
     cy: {
@@ -115,14 +117,14 @@ function Toolbar(props: ToolbarProps) {
             </div>
           )
         }
+            <TextField data-cy={cy.toolbarTitle} className={`mr-2 ${!isEdit && "input-deactive"}`} id="outlined-basic" label="Activity" variant="standard" value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()}/>
         {
-          isEdit ? <>
-            <TextField className="mr-2" id="outlined-basic" label="Activity" variant="standard" value={editValue} onChange={(e) => setEditValue(e.target.value)} />
+          isEdit && <>
             <IconButton aria-label="submit-edit" data-cy={cy.toolbarTitle} onClick={() => handleSubmitEditAction()}>
               <EditIcon />
             </IconButton>
           </>
-            : <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className="mr-2"> {title} </Typography>
+            // : <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className="mr-2"> {title} </Typography>
         }
 
         {/* {
@@ -140,14 +142,14 @@ function Toolbar(props: ToolbarProps) {
         {
           sortAction && (
             <>
-              <IconButton className="icon-button outlined mr-3" id="basic-button"
+              <IconButton data-cy="todo-sort-button" className="icon-button outlined mr-3" id="basic-button"
                 aria-controls={isOpenSort ? 'basic-menu' : undefined}
                 aria-haspopup="true"
                 
                 aria-expanded={isOpenSort ? 'true' : undefined}
                 onClick={(e) => showSort(e)}
               >
-                <ImportExport data-cy="todo-sort-button"/>
+                <ImportExport/>
               </IconButton>
               <Menu
                 id="basic-menu"

@@ -4,10 +4,10 @@ import {default as TextFieldBase, TextFieldProps as TextFieldBaseProps} from "@m
 import './styles.scss';
 
 function TextField(props: TextFieldBaseProps) {
-  const { children, ...restProps } = props;
+  const { children, className, ...restProps } = props;
   
   return (
-    <TextFieldBase {...restProps} className="text-field" />
+    <TextFieldBase {...restProps} className={`text-field ${className}`} />
   );
 }
 
