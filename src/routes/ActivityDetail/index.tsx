@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useParams } from 'react-router-dom';
 import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -16,6 +16,7 @@ import { data } from './data';
 import './styles.scss';
 
 function ActivityDetail() {
+  const dialogRef = useRef();
   const { activityId = "" } = useParams()
   const [detailData, setDetailData] = useState<IActivityDetail>({
     title: '',
@@ -223,6 +224,8 @@ function ActivityDetail() {
     document.addEventListener('click', function (event: any) {
       if (event.target.id === "body" && dialogOpt.open) {
         setDialogOpt({open: false});
+        // dialogRef.current.remove();
+        // $(".dialog").remove()
       }
     });
   }, [dialogOpt.open]);
@@ -231,7 +234,7 @@ function ActivityDetail() {
     <>
       <Toolbar sortAction={handleSort} title={detailData?.title} backBtn="/" editAction={handleUpdateTitle} createAction={handleCreate} data={data} />
       <TableList listData={listData} data={data} deleteAction={handleDelete} editAction={handleUpdate} statusAction={handleStatus} />
-      <Dialog {...dialogOpt} />
+      {dialogOpt.open && <Dialog  {...dialogOpt} /> }
       {/* <Modal  data-cy={dialogOpt["data-cy"]} title={dialogOpt.title} onClose={() => setDialogOpt({ open: false })} show={dialogOpt.open}>
         {dialogOpt.content}
       </Modal> */}
