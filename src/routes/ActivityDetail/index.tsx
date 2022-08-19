@@ -43,7 +43,7 @@ function ActivityDetail() {
   }
 
   function handleUpdateTitle(title: string) {
-    setDetailData({...detailData, title})
+    setDetailData({ ...detailData, title })
     activityReq.update(activityId, { title }).then((res) => {
       if (res) {
         loadData();
@@ -210,6 +210,10 @@ function ActivityDetail() {
       ...options,
       open: true,
       button: options.button,
+      onBackdropClick: () => {
+        alert("hi")
+        hideModal();
+      }
     }
 
     setDialogOpt(modalOptions);
@@ -222,8 +226,9 @@ function ActivityDetail() {
 
   useEffect(() => {
     document.addEventListener('click', function (event: any) {
+      console.log("🚀 ~ file: index.tsx ~ line 225 ~ event", event)
       if (event.target.id === "body" && dialogOpt.open) {
-        setDialogOpt({open: false});
+        setDialogOpt({ open: false });
         // dialogRef.current.remove();
         // $(".dialog").remove()
       }
@@ -234,7 +239,7 @@ function ActivityDetail() {
     <>
       <Toolbar sortAction={handleSort} title={detailData?.title} backBtn="/" editAction={handleUpdateTitle} createAction={handleCreate} data={data} />
       <TableList listData={listData} data={data} deleteAction={handleDelete} editAction={handleUpdate} statusAction={handleStatus} />
-      {dialogOpt.open && <Dialog  {...dialogOpt} /> }
+      {dialogOpt.open && <Dialog  {...dialogOpt} />}
       {/* <Modal  data-cy={dialogOpt["data-cy"]} title={dialogOpt.title} onClose={() => setDialogOpt({ open: false })} show={dialogOpt.open}>
         {dialogOpt.content}
       </Modal> */}
