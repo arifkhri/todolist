@@ -218,11 +218,23 @@ function ActivityDetail() {
     loadData();
   }, []);
 
+  useEffect(() => {
+    document.addEventListener('click', function (event: any) {
+      if (event.target.id === "body" && dialogOpt.open) {
+        setDialogOpt({open: false});
+      }
+    });
+  }, [dialogOpt.open]);
+
   return (
     <>
       <Toolbar sortAction={handleSort} title={detailData?.title} backBtn="/" editAction={handleUpdateTitle} createAction={handleCreate} data={data} />
       <TableList listData={listData} data={data} deleteAction={handleDelete} editAction={handleUpdate} statusAction={handleStatus} />
       <Dialog {...dialogOpt} />
+      {/* <Modal  data-cy={dialogOpt["data-cy"]} title={dialogOpt.title} onClose={() => setDialogOpt({ open: false })} show={dialogOpt.open}>
+        {dialogOpt.content}
+      </Modal> */}
+
       <Snackbar
         anchorOrigin={{ vertical: "top", horizontal: "center" }}
         {...snackbarOpt}

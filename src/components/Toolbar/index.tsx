@@ -117,14 +117,15 @@ function Toolbar(props: ToolbarProps) {
             </div>
           )
         }
-            <TextField data-cy={cy.toolbarTitle} className={`mr-2 ${!isEdit && "input-deactive"}`} id="outlined-basic" label="Activity" variant="standard" value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()}/>
+        <input data-cy={cy.toolbarTitle} className={`mr-2 input ${!isEdit && "input-deactive"}`} id="outlined-basic"  value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()}  />
+        {/* <TextField InputProps={{  }} className={`mr-2 ${!isEdit && "input-deactive"}`} id="outlined-basic" label="Activity" variant="standard" value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()} /> */}
         {
           isEdit && <>
             <IconButton aria-label="submit-edit" data-cy={cy.toolbarTitle} onClick={() => handleSubmitEditAction()}>
               <EditIcon />
             </IconButton>
           </>
-            // : <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className="mr-2"> {title} </Typography>
+          // : <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className="mr-2"> {title} </Typography>
         }
 
         {/* {
@@ -145,11 +146,11 @@ function Toolbar(props: ToolbarProps) {
               <IconButton data-cy="todo-sort-button" className="icon-button outlined mr-3" id="basic-button"
                 aria-controls={isOpenSort ? 'basic-menu' : undefined}
                 aria-haspopup="true"
-                
+
                 aria-expanded={isOpenSort ? 'true' : undefined}
                 onClick={(e) => showSort(e)}
               >
-                <ImportExport/>
+                <ImportExport />
               </IconButton>
               <Menu
                 id="basic-menu"
@@ -161,7 +162,7 @@ function Toolbar(props: ToolbarProps) {
                 }}
               >
                 {sortOptions.map((opt) => (
-                  <MenuItem onClick={() => handleSortAction(opt.value)} { ...sortValue === opt.value ? {"data-cy": "sort-selection-selected sort-selection"} : {"data-cy": "sort-selection"}}>
+                  <MenuItem onClick={() => handleSortAction(opt.value)} {...sortValue === opt.value ? { "data-cy": "sort-selection-selected sort-selection" } : { "data-cy": "sort-selection" }}>
                     <ListItemIcon data-cy="sort-selection-icon">{opt.icon}</ListItemIcon>
                     <ListItemText data-cy="sort-selection-title">{opt.label}</ListItemText>
                     {sortValue === opt.value && <ListItemText><Check /></ListItemText>}
