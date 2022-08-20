@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Outlet } from "react-router-dom";
 import Container from '@mui/material/Container';
 
@@ -9,7 +9,7 @@ function Layout() {
     <>
       <Header />
 
-      <Container>
+      <Container className="pt-4">
         <Outlet />
       </Container>
     </>

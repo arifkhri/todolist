@@ -11,12 +11,13 @@ import Toolbar from '../../components/Toolbar';
 import Dialog, { DialogProps } from '../../components/Dialog';
 import TableList from './components/TableList';
 import Form from './components/Form';
+import Modal from '../../components/Modal';
 import { data } from './data';
 
 import './styles.scss';
 
 function ActivityDetail() {
-  const dialogRef = useRef();
+  // const dialogRef = useRef();
   const { activityId = "" } = useParams()
   const [detailData, setDetailData] = useState<IActivityDetail>({
     title: '',
@@ -112,8 +113,8 @@ function ActivityDetail() {
       "data-cy": "modal-delete",
       content:
         <div className="d-flex justify-content-center flex-column px-3 mb-4">
-          <WarningAmberRounded color="error" data-cy={data.cy.confirmDelIcon} style={{ fontSize: "60px", margin: 'auto' }} />
-          <p data-cy={data.cy.confirmDelTitle} className="text-center "><strong>Konfirmasi</strong></p>
+          <img src={"/del-confirm.svg"} alt="del" data-cy={data.cy.confirmDelIcon} style={{ fontSize: "60px", margin: 'auto' }} />
+          <p data-cy={data.cy.confirmDelTitle} style={{ display: "none" }}><strong>Konfirmasi</strong></p>
           <p>Apakah anda yakin menghapus item <strong>"{record.title}"</strong>?
           </p>
         </div>
@@ -210,10 +211,10 @@ function ActivityDetail() {
       ...options,
       open: true,
       button: options.button,
-      onBackdropClick: () => {
-        alert("hi")
-        hideModal();
-      }
+      // onBackdropClick: () => {
+      //   alert("hi")
+      //   hideModal();
+      // }
     }
 
     setDialogOpt(modalOptions);
@@ -226,9 +227,10 @@ function ActivityDetail() {
 
   useEffect(() => {
     document.addEventListener('click', function (event: any) {
-      console.log("🚀 ~ file: index.tsx ~ line 225 ~ event", event)
-      if (event.target.id === "body" && dialogOpt.open) {
-        setDialogOpt({ open: false });
+      // console.log("🚀 ~ file: index.tsx ~ line 225 ~ event", )
+      if (event.target.id === "body" && event.target.className.includes("modal")) {
+        // console.log("masuk sini")
+        // setDialogOpt({ open: false });
         // dialogRef.current.remove();
         // $(".dialog").remove()
       }
@@ -239,8 +241,10 @@ function ActivityDetail() {
     <>
       <Toolbar sortAction={handleSort} title={detailData?.title} backBtn="/" editAction={handleUpdateTitle} createAction={handleCreate} data={data} />
       <TableList listData={listData} data={data} deleteAction={handleDelete} editAction={handleUpdate} statusAction={handleStatus} />
-      {dialogOpt.open && <Dialog  {...dialogOpt} />}
-      {/* <Modal  data-cy={dialogOpt["data-cy"]} title={dialogOpt.title} onClose={() => setDialogOpt({ open: false })} show={dialogOpt.open}>
+      {/* {dialogOpt.open && 
+      } */}
+      <Dialog  {...dialogOpt} /> 
+      {/* <Modal button={dialogOpt.button}  data-cy={dialogOpt["data-cy"]} title={dialogOpt.title} open={dialogOpt.open}>
         {dialogOpt.content}
       </Modal> */}
 

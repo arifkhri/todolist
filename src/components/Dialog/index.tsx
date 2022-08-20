@@ -11,6 +11,7 @@ import './styles.scss';
 
 export declare interface DialogProps extends DialogBaseProps {
   title?: string;
+  // ref?: any;
   open: boolean;
   content?: any;
   "data-cy"?: string;
@@ -28,10 +29,11 @@ export declare interface DialogProps extends DialogBaseProps {
 
 export default function Dialog(props: DialogProps) {
 
-  const { button, open, content, title, onClose } = props;
+  const { button, open, content, title, onClose, ...restProps } = props;
 
   return (
     <DialogBase
+      {...restProps}
       className="dialog"
       onClose={onClose}
       open={open}
@@ -39,7 +41,7 @@ export default function Dialog(props: DialogProps) {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
+      <DialogTitle id="alert-dialog-title" >{title}</DialogTitle>
 
       <DialogContent style={{ maxWidth: "500px" }}>
         <DialogContentText id="alert-dialog-description">
@@ -50,8 +52,8 @@ export default function Dialog(props: DialogProps) {
       {
         button && (
           <DialogActions className="d-flex- justify-content-center">
-            <Button variant="text" {...(button?.cancel || {})}>{button?.cancel?.title || "Batal"}</Button>
-            <Button type="submit" variant="contained" {...(button?.submit || {})}>{button?.submit?.title || "Simpan"}</Button>
+            <Button className="bg-gray  py-2 px-4" variant="text" {...(button?.cancel || {})}>{button?.cancel?.title || "Batal"}</Button>
+            <Button type="submit" variant="contained" className="ml-4 py-2 px-4" {...(button?.submit || {})}>{button?.submit?.title || "Simpan"}</Button>
           </DialogActions>
         )
       }

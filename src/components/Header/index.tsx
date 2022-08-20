@@ -1,6 +1,5 @@
 import React from "react";
 import AppBar from '@mui/material/AppBar';
-import Container from '@mui/material/Container';
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 
@@ -17,7 +16,7 @@ function Header() {
             data-cy="header-background"
             variant="h6"
             component="div"
-            className="text-center title"
+            className="title"
             sx={{ flexGrow: 1, display: { xs: 'block' } }}
           >
             <h3 className="m-0" data-cy="header-title">TO DO LIST APP</h3>

@@ -1,0 +1,17 @@
+.container-table {
+  padding: 0 6rem;
+  .table {
+    td {
+      border-bottom: 0!important;
+    }
+    .card {
+      display: flex;
+      justify-content: space-between;
+      background-color: #fff;
+      margin-bottom: 10px;
+      padding: 27px;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+  }
+}

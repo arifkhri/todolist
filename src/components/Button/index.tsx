@@ -8,9 +8,9 @@ export declare interface ButtonProps extends ButtonBaseProps {
 }
 
 function Button(props: ButtonProps) {
-  const { children, ...restProps } = props;
+  const { children, className, ...restProps } = props;
   return (
-    <ButtonBase {...restProps} className="button">{children}</ButtonBase>
+    <ButtonBase {...restProps} className={`button ${className}`}>{children}</ButtonBase>
   );
 }
 

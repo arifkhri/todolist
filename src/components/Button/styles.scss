@@ -1,23 +1,29 @@
-@import '../../assets/styles/variables';
+@import "../../assets/styles/variables";
 
 .button {
-  color: $white;
-  border-radius: 20px;
+  &.MuiButton-containedError {
+    background: #ed4c5c!important;
+  }
+  color: $white !important;
+  border-radius: 50px !important;
+  font-size: 17px !important;
+  font-weight: 800;
+  box-shadow: none!important;
 
   &.MuiButton-outlined {
-    color: $primary
+    color: $primary !important;
   }
 
   &.MuiButton-text {
-    color: $soft-black;
+    color: $soft-black !important;
     &:hover {
-      background: $grey-bg;
+      background: $grey-bg !important;
     }
   }
 }
 
 .icon-button {
   &.outlined {
-    border: 1px solid #e5e5e5;
+    border: 1px solid #e5e5e5 !important;
   }
 }

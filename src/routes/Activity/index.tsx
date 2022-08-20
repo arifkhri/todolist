@@ -45,8 +45,8 @@ function Activity() {
       "data-cy": "modal-delete",
       content:
         <div className="d-flex justify-content-center flex-column px-3 mb-4">
-          <WarningAmberRounded color="error" data-cy={data.cy.confirmDelIcon} style={{ fontSize: "60px", margin: 'auto' }} />
-          <p data-cy={data.cy.confirmDelTitle} className="text-center "><strong>Konfirmasi</strong></p>
+          <img src={"/del-confirm.svg"} alt="del" data-cy={data.cy.confirmDelIcon} style={{ fontSize: "60px", margin: 'auto' }} />
+          <p data-cy={data.cy.confirmDelTitle} style={{ display: "none" }}><strong>Konfirmasi</strong></p>
           <p>Apakah anda yakin menghapus item <strong>"{record.title}"</strong>?
           </p>
         </div>
@@ -71,7 +71,7 @@ function Activity() {
       if (res) {
         setDialogOpt({
           open: true,
-          onClose: () => setDialogOpt({open:false}),
+          onClose: () => setDialogOpt({ open: false }),
           "data-cy": "modal-information",
           content:
             <div className="d-flex justify-content-center px-3 mb-4">
@@ -83,7 +83,7 @@ function Activity() {
       } else {
         setDialogOpt({
           open: true,
-          onClose: () => setDialogOpt({open:false}),
+          onClose: () => setDialogOpt({ open: false }),
           "data-cy": "modal-information",
           content:
             <div className="d-flex justify-content-center px-3 mb-4">
@@ -94,7 +94,7 @@ function Activity() {
       }
     });
   }
-  
+
 
   useEffect(() => {
     setTitle("Dashboard");

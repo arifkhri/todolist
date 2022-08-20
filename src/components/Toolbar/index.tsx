@@ -48,23 +48,23 @@ function Toolbar(props: ToolbarProps) {
   const [sortValue, setSortValue] = useState<string>('');
 
   const sortOptions = [{
-    icon: <ImportExport />,
+    icon: <img src="/sort-newest.svg" alt="sort-newest" />,
     label: 'Terbaru',
     value: 'newest',
   }, {
-    icon: <ImportExport />,
+    icon: <img src="/sort-oldest.svg" alt="sort-oldest" />,
     label: 'Terlama',
     value: 'oldest',
   }, {
-    icon: <ImportExport />,
+    icon: <img src="/sort-a.svg" alt="sort-a" />,
     label: 'A-Z',
     value: 'a-z',
   }, {
-    icon: <ImportExport />,
+    icon: <img src="/sort-z.svg" alt="sort-z" />,
     label: 'Z-A',
     value: 'z-a',
   }, {
-    icon: <ImportExport />,
+    icon: <img src="/sort-active.svg" alt="sort-active" />,
     label: 'Belum Selesai',
     value: 'not',
   }]
@@ -111,7 +111,7 @@ function Toolbar(props: ToolbarProps) {
   }, [title])
 
   return (
-    <Grid container className="mt-5 mb-5">
+    <Grid container className="mt-5 mb-5 toolbar">
       <Grid item xs={6} className="d-flex">
         {
           backBtn && (
@@ -127,7 +127,7 @@ function Toolbar(props: ToolbarProps) {
           isEdit ? <>
             <input ref={inputRef} data-cy={cy.toolbarTitle} className={`mr-2 input ${!isEdit && "d-none input-deactive"}`} id="outlined-basic" value={editValue} onChange={(e) => setEditValue(e.target.value)} onBlur={() => handleSubmitEditAction()} onFocus={() => handleEditAction()} />
             <IconButton aria-label="submit-edit" data-cy="todo-title-edit-button" onClick={() => handleSubmitEditAction()} className={`${!isEdit && "d-none"}`}>
-              <EditIcon />
+              <img src={"/edit.svg"} alt="del" />
             </IconButton>
           </> :
             <Typography variant="h4" data-cy={cy.toolbarTitle} onClick={() => handleEditAction()} className={`mr-2 ${isEdit && "d-none"}`}> {title} </Typography>
@@ -148,7 +148,7 @@ function Toolbar(props: ToolbarProps) {
         {
           sortAction && (
             <>
-              <IconButton data-cy="todo-sort-button" className="icon-button outlined mr-3" id="basic-button"
+              <IconButton data-cy="todo-sort-button" className="btn icon-button outlined mr-3 px-3 py-3" id="basic-button"
                 aria-controls={isOpenSort ? 'basic-menu' : undefined}
                 aria-haspopup="true"
 
@@ -158,6 +158,7 @@ function Toolbar(props: ToolbarProps) {
                 <ImportExport />
               </IconButton>
               <Menu
+                className="menu"
                 id="basic-menu"
                 anchorEl={anchorEl}
                 open={isOpenSort}
@@ -178,7 +179,7 @@ function Toolbar(props: ToolbarProps) {
           )
         }
 
-        <Button variant="contained" data-cy={cy.toolbarCreateBtn} onClick={createAction}> + Tambah </Button>
+        <Button className="py-2 px-4" variant="contained" data-cy={cy.toolbarCreateBtn} onClick={createAction}> + Tambah </Button>
       </Grid>
     </Grid>
   )

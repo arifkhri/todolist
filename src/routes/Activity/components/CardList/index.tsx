@@ -12,6 +12,8 @@ import Card from '../../../../components/Card';
 import EmptyState from '../../../../components/EmptyState';
 import { data } from '../../data';
 
+import "./styles.scss";
+
 declare interface CardListProps {
   data: {
     cy: {
@@ -46,13 +48,13 @@ function CardList(props: CardListProps) {
             <div data-cy="activity-item" onClick={() => {
               navigate(`/detail/${record.id}`)
             }}>
-            <Typography gutterBottom variant="h5" noWrap className="link py-3 px-3 text-center" data-cy={cy.cardTitle}>
+            <Typography gutterBottom variant="h5" noWrap className="pointer title-card py-3 px-4" data-cy={cy.cardTitle}>
               {record.title}
             </Typography>
             </div>
           </Tooltip>
 
-          <div className="d-flex justify-content-between align-items-baseline py-3 pr-4 pl-5">
+          <div className="d-flex justify-content-between align-items-baseline pr-3 pl-4 pb-3">
             <div>
               <Typography variant="body1" color="text.secondary" data-cy={cy.cardCreatedDate}>
                 {dayjs(record.created_at).format("D MMMM YYYY")}
@@ -60,7 +62,7 @@ function CardList(props: CardListProps) {
             </div>
             <div>
               <IconButton aria-label="delete" data-cy={cy.cardDeleteBtn} onClick={() => handleDelete(record)}>
-                <DeleteIcon />
+                <img src={"/trash.svg"} alt="del" />
               </IconButton>
             </div>
           </div>

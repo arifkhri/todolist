@@ -37,6 +37,10 @@ export default function Form(props: FormProps) {
     setFormValid(getValues('title'));
   }, [watch('title')])
 
+  useEffect(() => {
+    console.log(getValues('priority'))
+  }, [watch('priority')])
+
   return (
     <div className="d-flex flex-column">
       <form onSubmit={handleSubmit(afterSubmitAction)}>
@@ -86,8 +90,8 @@ export default function Form(props: FormProps) {
         </div>
 
         <div className="d-flex justify-content-end mt-3">
-          <Button variant="text" className="mr-2" data-cy="modal-add-close-button" onClick={cancelAction}>Batal</Button>
-          <Button disabled={!formValid} type="submit" variant="contained" data-cy="modal-add-save-button">Simpan</Button>
+          <Button variant="text" className="py-2 px-4 bg-gray" data-cy="modal-add-close-button" onClick={cancelAction}>Batal</Button>
+          <Button disabled={!formValid} type="submit" className="ml-4 py-2 px-4" variant="contained" data-cy="modal-add-save-button">Simpan</Button>
         </div>
       </form>
     </div >
